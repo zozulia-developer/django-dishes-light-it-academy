@@ -4,7 +4,7 @@ from django.forms import ValidationError
 from .models import Dish
 
 
-class PostForm(forms.ModelForm):
+class PostForm(forms.Form):
     class Meta:
         model = Dish
         fields = ['number']
