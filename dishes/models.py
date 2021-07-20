@@ -50,10 +50,12 @@ class DishIngredient(models.Model):
 class OrderIngredient(models.Model):
     order_id = models.ForeignKey(
         'Order',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='oi'
     )
     ingredient = models.ForeignKey(
         'Ingredient',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='oi'
     )
     amount = models.PositiveIntegerField(default=1)

@@ -1,15 +1,14 @@
 from django import forms
 from django.forms import ValidationError
 
-from .models import Dish
+from .models import OrderIngredient, Order
 
 
-class PostForm(forms.Form):
+class OrderPostForm(forms.Form):
     class Meta:
-        model = Dish
-        fields = ['number']
-
-        widgets = {
-            'number': forms.NumberInput(attrs={'class': 'form-control'})
-        }
+        model = Order
+        fields = ['ingredients']
+        # widgets = {
+        #     'amount': forms.NumberInput(attrs={'class': 'form-control'})
+        # }
 
