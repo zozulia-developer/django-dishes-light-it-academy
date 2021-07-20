@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from dishes_app.models import Ingredient, Dish, Order
+from dishes.models import Ingredient, Dish, Order
 
 
 class DishIngredientInline(admin.TabularInline):

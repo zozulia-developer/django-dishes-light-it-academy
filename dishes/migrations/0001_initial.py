@@ -42,27 +42,27 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('amount', models.PositiveIntegerField(default=1)),
-                ('ingredient_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='dishes_app.ingredient')),
-                ('order_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='dishes_app.order')),
+                ('ingredient_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='dishes.ingredient')),
+                ('order_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='dishes.order')),
             ],
         ),
         migrations.AddField(
             model_name='order',
             name='ingredients',
-            field=models.ManyToManyField(related_name='orders', through='dishes_app.OrderIngredient', to='dishes_app.Ingredient'),
+            field=models.ManyToManyField(related_name='orders', through='dishes.OrderIngredient', to='dishes.Ingredient'),
         ),
         migrations.CreateModel(
             name='DishIngredient',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('amount', models.PositiveIntegerField(default=1)),
-                ('dish_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='dishes_app.dish')),
-                ('ingredient_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='dishes_app.ingredient')),
+                ('dish_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='dishes.dish')),
+                ('ingredient_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='dishes.ingredient')),
             ],
         ),
         migrations.AddField(
             model_name='dish',
             name='ingredients',
-            field=models.ManyToManyField(related_name='dishes', through='dishes_app.DishIngredient', to='dishes_app.Ingredient'),
+            field=models.ManyToManyField(related_name='dish_order', through='dishes.DishIngredient', to='dishes.Ingredient'),
         ),
     ]

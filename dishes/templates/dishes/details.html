@@ -1,0 +1,16 @@
+{% extends 'dishes/base.html' %}
+
+{% block header %}Dish Details{% endblock %}
+
+{% block content %}
+  <p>Dish name: {{ dish }}</p>
+  <p>Ingredients:</p>
+  <ul>
+    {% for ingredient in dish.di.all %}
+      <li>{{ ingredient.ingredient }} - {{ ingredient.amount }}</li>
+    {% endfor %}
+  </ul>
+  <div class="col-12">
+    <a class="btn btn-primary" href="{% url 'dishes:create_order' %}">Make Order</a>
+  </div>
+{% endblock %}
