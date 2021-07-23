@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 from .forms import OrderIngredientsForm, DishIngredientsForm
-from .models import Dish, OrderIngredient
+from .models import Dish
 
 
 class DishListView(ListView):

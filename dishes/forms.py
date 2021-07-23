@@ -10,7 +10,7 @@ class DishIngredientsForm(forms.ModelForm):
         fields = ['name', 'ingredients']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'ingredients': forms.SelectMultiple(attrs={'class': 'form-select'})
+            'ingredients': forms.Select(attrs={'class': 'form-select'})
         }
 
 
