@@ -1,5 +1,6 @@
 from django.core.validators import MinValueValidator
 from django.db import models
+from django.urls import reverse
 
 
 class Dish(models.Model):
@@ -62,6 +63,15 @@ class DishIngredient(models.Model):
         default=1,
         validators=[MinValueValidator(1)]
     )
+
+    class Meta:
+        pass
+
+    def get_absolute_url(self):
+        return reverse('dishes:index')
+
+    def __str__(self):
+        return str(self.pk)
 
 
 class OrderIngredient(models.Model):

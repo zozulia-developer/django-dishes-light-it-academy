@@ -1,0 +1,10 @@
+{% extends 'dishes/base.html' %}
+
+{% block header %}Search Results{% endblock %}
+
+{% block content %}
+    {% for dish in object_list %}
+        <p><a href="{% url 'dishes:details' dish.id %}">{{ dish }}</a></p>
+        <hr>
+    {% endfor %}
+{% endblock %}

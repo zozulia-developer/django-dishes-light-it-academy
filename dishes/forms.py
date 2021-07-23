@@ -6,12 +6,19 @@ from .models import Dish, OrderIngredient, DishIngredient
 
 class DishIngredientsForm(forms.ModelForm):
     class Meta:
-        model = Dish
-        fields = ['name', 'ingredients']
-        widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'ingredients': forms.Select(attrs={'class': 'form-select'})
-        }
+        # model = Dish
+        # fields = ['name', 'ingredients']
+        # widgets = {
+        #     'name': forms.TextInput(attrs={'class': 'form-control'}),
+        #     'ingredients': forms.Select(attrs={'class': 'form-select'})
+        # }
+        model = DishIngredient
+        fields = ['dish', 'ingredient', 'amount']
+        # widgets = {
+        #     'dish': forms.TextInput(attrs={'class': 'form-control'}),
+        #     'ingredient': forms.Select(attrs={'class': 'form-select'}),
+        #     'amount': forms.NumberInput()
+        # }
 
 
 class OrderIngredientsForm(forms.ModelForm):

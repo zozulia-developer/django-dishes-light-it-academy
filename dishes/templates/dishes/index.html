@@ -3,9 +3,21 @@
 {% block header %}Dishes List{% endblock %}
 
 {% block content %}
-    <p>
-        <a href="{% url 'dishes:create_dish' %}" class="btn btn-primary">Create Dish</a>
-    </p>
+    <div class="row">
+        <div class="col-7">
+            <a href="{% url 'dishes:create_dish' %}" class="btn btn-primary mb-1">Create Dish</a>
+        </div>
+        <div class="col-5">
+            <form action="{% url 'dishes:search_results' %}" method="get">
+                <div class="input-group">
+                    <input class="form-control" name="q" type="text" placeholder="Search...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary">Search</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
     <hr>
     {% for dish in dishes %}
         <p>Dish name: {{ dish }}</p>

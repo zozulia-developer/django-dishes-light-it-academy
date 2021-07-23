@@ -5,6 +5,18 @@ from .forms import OrderIngredientsForm, DishIngredientsForm
 from .models import Dish
 
 
+class SearchResultsView(ListView):
+    model = Dish
+    template_name = 'dishes/search_results.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        object_list = Dish.objects.filter(
+            name__icontains=query
+        )
+        return object_list
+
+
 class DishListView(ListView):
     model = Dish
     template_name = 'dishes/index.html'
