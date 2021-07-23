@@ -1,15 +1,24 @@
 from django import forms
 from django.forms import ValidationError
 
-from .models import Dish
+from .models import Dish, OrderIngredient, DishIngredient
 
 
-class PostForm(forms.Form):
+class DishIngredientsForm(forms.ModelForm):
     class Meta:
         model = Dish
-        fields = ['number']
-
+        fields = ['name', 'ingredients']
         widgets = {
-            'number': forms.NumberInput(attrs={'class': 'form-control'})
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'ingredients': forms.SelectMultiple(attrs={'class': 'form-select'})
+        }
+
+
+class OrderIngredientsForm(forms.ModelForm):
+    class Meta:
+        model = OrderIngredient
+        fields = ['order', 'ingredient', 'amount']
+        widgets = {
+            'amount': forms.NumberInput(attrs={'class': 'form-control'})
         }
 

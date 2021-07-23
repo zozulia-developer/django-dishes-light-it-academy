@@ -3,6 +3,10 @@
 {% block header %}Dishes List{% endblock %}
 
 {% block content %}
+    <p>
+        <a href="{% url 'dishes:create_dish' %}" class="btn btn-primary">Create Dish</a>
+    </p>
+    <hr>
     {% for dish in dishes %}
         <p>Dish name: {{ dish }}</p>
         <a href="{% url 'dishes:details' dish.id %}">Details</a>

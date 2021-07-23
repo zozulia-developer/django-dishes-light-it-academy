@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
-from .forms import PostForm
-from .models import Dish
+from .forms import OrderIngredientsForm, DishIngredientsForm
+from .models import Dish, OrderIngredient
 
 
 class DishListView(ListView):
@@ -17,5 +17,11 @@ class DishDetailView(DetailView):
     context_object_name = 'dish'
 
 
-class DishCreateView(CreateView):
-    pass
+class DishIngredientCreateView(CreateView):
+    template_name = 'dishes/create_dish.html'
+    form_class = DishIngredientsForm
+
+
+class OrderIngredientsCreateView(CreateView):
+    template_name = 'dishes/create_order.html'
+    form_class = OrderIngredientsForm

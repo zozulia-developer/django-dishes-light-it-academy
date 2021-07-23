@@ -12,7 +12,7 @@ class OrderIngredientInline(admin.TabularInline):
 
 
 class DishAdmin(admin.ModelAdmin):
-    list_display = ("name",)
+    list_display = ("name", "created_at")
     inlines = [DishIngredientInline]
 
 
