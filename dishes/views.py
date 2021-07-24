@@ -1,7 +1,8 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
-from .forms import OrderIngredientsForm, DishIngredientsForm
+from .forms import OrderIngredientsForm, DishIngredientsForm, DishIngredientFormset
 from .models import Dish
 
 
@@ -30,8 +31,30 @@ class DishDetailView(DetailView):
 
 
 class DishIngredientCreateView(CreateView):
-    template_name = 'dishes/create_dish.html'
+    # template_name = 'dishes/dish_form.html'
+    # form_class = DishIngredientsForm
+    model = Dish
+    success_url = reverse_lazy('dishes:index')
     form_class = DishIngredientsForm
+
+    def get_context_data(self, **kwargs):
+        context = super(DishIngredientCreateView, self).get_context_data()
+        if self.request.POST:
+            context['di_formset'] = DishIngredientFormset(self.request.POST)
+        else:
+            context['di_formset'] = DishIngredientFormset()
+        return context
+
+    def form_valid(self, form):
+        context = self.get_context_data(form=form)
+        formset = context['di_formset']
+        if formset.is_valid():
+            response = super().form_valid(form)
+            formset.instance = self.object
+            formset.save()
+            return response
+        else:
+            return super().form_invalid(form)
 
 
 class OrderIngredientsCreateView(CreateView):

@@ -6,6 +6,8 @@
     <form action="" method="post">
         {% csrf_token %}
         {{ form.as_p }}
+        <hr>
+        {{ di_formset.as_p }}
         <button class="btn btn-primary btn-lg btn-block">Create Dish</button>
     </form>
 {% endblock %}
