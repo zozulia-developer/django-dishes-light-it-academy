@@ -2,8 +2,9 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
-from .forms import OrderIngredientsForm, DishIngredientsForm, DishIngredientFormset, IngredientForm
-from .models import Dish, Ingredient
+from .forms import OrderIngredientsForm, DishIngredientsForm, DishIngredientFormset, IngredientForm, \
+    OrderIngredientFormset
+from .models import Dish, Ingredient, Order
 
 
 class SearchResultsView(ListView):
@@ -78,6 +79,26 @@ class IngredientCreateView(CreateView):
     form_class = IngredientForm
 
 
-class OrderIngredientsCreateView(CreateView):
-    template_name = 'dishes/create_order.html'
+class OrderIngredientCreateView(CreateView):
+    model = Order
+    success_url = reverse_lazy('dishes:index')
     form_class = OrderIngredientsForm
+
+    def get_context_data(self, **kwargs):
+        context = super(OrderIngredientCreateView, self).get_context_data()
+        if self.request.POST:
+            context['oi_formset'] = OrderIngredientFormset(self.request.POST)
+        else:
+            context['oi_formset'] = OrderIngredientFormset()
+        return context
+
+    def form_valid(self, form):
+        context = self.get_context_data(form=form)
+        formset = context['oi_formset']
+        if formset.is_valid():
+            response = super().form_valid(form)
+            formset.instance = self.object
+            formset.save()
+            return response
+        else:
+            return super().form_invalid(form)

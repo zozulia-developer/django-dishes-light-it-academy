@@ -40,12 +40,13 @@ class Ingredient(models.Model):
 class Order(models.Model):
     dish = models.ForeignKey(
         'Dish',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='orders'
     )
     ingredients = models.ManyToManyField(
         'Ingredient',
-        through="OrderIngredient",
-        related_name="orders",
+        through='OrderIngredient',
+        related_name='orders',
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -95,3 +96,12 @@ class OrderIngredient(models.Model):
         default=1,
         validators=[MinValueValidator(1)]
     )
+
+    class Meta:
+        pass
+
+    def get_absolute_url(self):
+        return reverse('dishes:index')
+
+    def __str__(self):
+        return str(self.pk)
