@@ -31,8 +31,6 @@ class DishDetailView(DetailView):
 
 
 class DishIngredientCreateView(CreateView):
-    # template_name = 'dishes/dish_form.html'
-    # form_class = DishIngredientsForm
     model = Dish
     success_url = reverse_lazy('dishes:index')
     form_class = DishIngredientsForm

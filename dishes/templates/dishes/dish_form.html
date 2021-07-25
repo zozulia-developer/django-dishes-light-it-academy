@@ -1,13 +1,18 @@
 {% extends 'dishes/base.html' %}
-
+{% load static %}
 {% block header %}Create Dish{% endblock %}
 
 {% block content %}
-    <form action="" method="post">
+    <form id="form-container" action="" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <hr>
-        {{ di_formset.as_p }}
+        <div class="di-formset">
+            {{ di_formset.as_p }}
+        </div>
+        <button id="add-ingredient" class="btn btn-primary">+ Add ingredient</button>
+        <hr>
         <button class="btn btn-primary btn-lg btn-block">Create Dish</button>
     </form>
+    <script src="{% static 'dishes/js/index.js' %}"></script>
 {% endblock %}
