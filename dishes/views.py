@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
-from .forms import OrderIngredientsForm, DishIngredientsForm, DishIngredientFormset
-from .models import Dish
+from .forms import OrderIngredientsForm, DishIngredientsForm, DishIngredientFormset, IngredientForm
+from .models import Dish, Ingredient
 
 
 class SearchResultsView(ListView):
@@ -11,9 +11,9 @@ class SearchResultsView(ListView):
     template_name = 'dishes/search_results.html'
 
     def get_queryset(self):
-        query = self.request.GET.get('q')
+        query_q = self.request.GET.get('q')
         object_list = Dish.objects.filter(
-            name__icontains=query
+            name__icontains=query_q
         )
         return object_list
 
@@ -22,6 +22,18 @@ class DishListView(ListView):
     model = Dish
     template_name = 'dishes/index.html'
     context_object_name = 'dishes'
+
+    def get_queryset(self):
+        query_filter = self.request.GET.get('filter')
+        query_from = self.request.GET.get('from')
+        query_to = self.request.GET.get('to')
+        if query_filter and query_filter == 'asc':
+            dishes = Dish.objects.all().order_by('created_at')
+        elif query_from:
+            dishes = Dish.objects.filter(created_at__range=[query_from, query_to])
+        else:
+            dishes = Dish.objects.all().order_by('-created_at')
+        return dishes
 
 
 class DishDetailView(DetailView):
@@ -53,6 +65,17 @@ class DishIngredientCreateView(CreateView):
             return response
         else:
             return super().form_invalid(form)
+
+
+class IngredientListView(ListView):
+    model = Ingredient
+    template_name = 'dishes/ingredients.html'
+    context_object_name = 'ingredients'
+
+
+class IngredientCreateView(CreateView):
+    template_name = 'dishes/create_ingredient.html'
+    form_class = IngredientForm
 
 
 class OrderIngredientsCreateView(CreateView):

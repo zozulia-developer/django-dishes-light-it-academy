@@ -3,8 +3,14 @@
 {% block header %}Search Results{% endblock %}
 
 {% block content %}
-    {% for dish in object_list %}
-        <p><a href="{% url 'dishes:details' dish.id %}">{{ dish }}</a></p>
-        <hr>
-    {% endfor %}
+{% for dish in object_list %}
+<p>
+    <a href="{% url 'dishes:details' dish.id %}">{{ dish }}</a>
+</p>
+<hr>
+{% endfor %}
+{% if object_list|length == 0 %}
+<h2 class="text-warning">Oops! No Results!</h2>
+<a href="{% url 'dishes:index' %}" class="btn btn-primary">Go Back</a>
+{% endif %}
 {% endblock %}

@@ -3,25 +3,90 @@
 {% block header %}Dishes List{% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-7">
-            <a href="{% url 'dishes:create_dish' %}" class="btn btn-primary mb-1">Create Dish</a>
-        </div>
-        <div class="col-5">
-            <form action="{% url 'dishes:search_results' %}" method="get">
-                <div class="input-group">
-                    <input class="form-control" name="q" type="text" placeholder="Search...">
-                    <span class="input-group-btn">
+<div class="row mb-1">
+    <div class="col-5">
+        <a href="{% url 'dishes:create_dish' %}" class="btn btn-primary">Create Dish</a>
+    </div>
+    <div class="col-7">
+        <form action="{% url 'dishes:search_results' %}" method="get">
+            <div class="input-group">
+                <input class="form-control" name="q" type="text" placeholder="Search...">
+                <span class="input-group-btn">
                         <button class="btn btn-primary">Search</button>
                     </span>
-                </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
-    <hr>
-    {% for dish in dishes %}
-        <p>Dish name: {{ dish }}</p>
+</div>
+<hr>
+<div class="row">
+    <div class="col-7 border">
+        {% for dish in dishes %}
+        <p>Dish name: {{ dish.name }}</p>
+        <p>Created at: {{ dish.created_at }}</p>
         <a href="{% url 'dishes:details' dish.id %}">Details</a>
         <hr>
-    {% endfor %}
+        {% endfor %}
+        {% if dishes|length == 0 %}
+        <h2 class="text-warning">Oops! No Results!</h2>
+        {% endif %}
+    </div>
+    <div class="col-5 border">
+        <h3>Filters:</h3>
+        <hr>
+        <form action="{% url 'dishes:index' %}" class="mb-4">
+            <p>from:
+                <input type="date" class="form-control" name="from" required>
+            </p>
+            to:
+            <input type="date" class="form-control mb-1" name="to" required>
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-primary">Filter by date</button>
+            </div>
+        </form>
+        <hr>
+        <form action="{% url 'dishes:index' %}" class="">
+            <div class="form-check">
+                <input id="radio-desc" class="form-check-input" value="desc" type="radio" name="filter"
+                       onclick="this.form.submit()">
+                <label class="form-check-label" for="radio-desc">
+                    Created At Descending Sort
+                </label>
+            </div>
+            <div class="form-check">
+                <input id="radio-asc" class="form-check-input" value="asc" type="radio" name="filter"
+                       onclick="this.form.submit()" checked>
+                <label class="form-check-label" for="radio-asc">
+                    Created At Ascending Sort
+                </label>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Script for radio filter -->
+<script>
+    let s = window.location.search;
+    let radio_asc = document.querySelector('#radio-asc')
+    let radio_desc = document.querySelector('#radio-desc')
+    if (s) {
+        s = s.match(new RegExp('filter' + '=([^&=]+)'));
+        s = s ? s[1] : false
+    }
+    if (s == 'asc') {
+        radio_asc.checked = true
+    } else if (s == 'desc') {
+        radio_desc.checked = true
+    } else {
+        radio_desc.checked = true
+    }
+
+
+
+
+
+
+
+
+</script>
 {% endblock %}

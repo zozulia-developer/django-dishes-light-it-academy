@@ -9,10 +9,10 @@ addButton.addEventListener('click', (e) => {
     e.preventDefault()
 
     let newForm = dishForm[0].cloneNode(true)
-    let formRegex = RegExp(`form-(\\d){1}-`, 'g')
+    let formRegex = RegExp(`di-(\\d){1}-`, 'g')
 
     formNum++
-    newForm.innerHTML = newForm.innerHTML.replace(formRegex, `form-${formNum}-`)
+    newForm.innerHTML = newForm.innerHTML.replace(formRegex, `di-${formNum}-`)
     container.insertBefore(newForm, addButton)
 
     totalForms.setAttribute('value', `${formNum+1}`)

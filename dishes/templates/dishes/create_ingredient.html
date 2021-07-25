@@ -1,0 +1,11 @@
+{% extends 'dishes/base.html' %}
+
+{% block header %}Create Ingredient{% endblock %}
+
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary btn-lg btn-block">Create Ingredient</button>
+    </form>
+{% endblock %}

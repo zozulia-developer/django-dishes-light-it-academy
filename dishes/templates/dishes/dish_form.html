@@ -8,11 +8,19 @@
         {{ form.as_p }}
         <hr>
         <div class="di-formset">
-            {{ di_formset.as_p }}
+            {{ di_formset }}
         </div>
-        <button id="add-ingredient" class="btn btn-primary">+ Add ingredient</button>
+        <button id="add-ingredient" class="btn btn-primary mt-1">+ Add ingredient</button>
         <hr>
         <button class="btn btn-primary btn-lg btn-block">Create Dish</button>
     </form>
+<!--    <script src="{% static 'dishes/js/jquery.formset.js' %}"></script>-->
     <script src="{% static 'dishes/js/index.js' %}"></script>
+    <script>
+        $(function() {
+            $('#form-container .di-formset').formset({
+                prefix: '{{ di_formset.prefix }}'
+            })
+        })
+    </script>
 {% endblock %}

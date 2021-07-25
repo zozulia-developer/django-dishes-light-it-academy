@@ -1,7 +1,22 @@
 from django import forms
 from django.forms import ValidationError, inlineformset_factory
 
-from .models import Dish, OrderIngredient, DishIngredient
+from .models import Dish, OrderIngredient, DishIngredient, Ingredient
+
+
+class IngredientForm(forms.ModelForm):
+    class Meta:
+        model = Ingredient
+        fields = ['name']
+        labels = {
+            'name': 'Ingredient Name'
+        }
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter ingredient name'
+            })
+        }
 
 
 class OrderIngredientsForm(forms.ModelForm):
@@ -34,6 +49,14 @@ class DishIngredientsForm(forms.ModelForm):
 DishIngredientFormset = inlineformset_factory(
     Dish, DishIngredient,
     fields=['ingredient', 'amount'],
+    labels={
+        'ingredient': 'Ingredient name',
+        'amount': 'Ingredient Amount'
+    },
+    widgets={
+        'ingredient': forms.Select(attrs={'class': 'form-select'}),
+        'amount': forms.NumberInput(attrs={'class': 'form-control'}),
+    },
     exclude=[],
     fk_name='dish',
     extra=1,
