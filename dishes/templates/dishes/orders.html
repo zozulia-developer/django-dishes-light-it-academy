@@ -1,0 +1,15 @@
+{% extends 'dishes/base.html' %}
+
+{% block header %}Orders List{% endblock %}
+
+{% block content %}
+<hr>
+{% for order in orders %}
+<p>Order id: {{ order.id }}</p>
+<hr>
+{% endfor %}
+{% if orders|length == 0 %}
+<h2 class="text-warning">Oops! There is no information yet!</h2>
+<a href="{% url 'dishes:index' %}" class="btn btn-primary">Go Back</a>
+{% endif %}
+{% endblock %}

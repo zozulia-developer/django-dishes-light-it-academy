@@ -1,7 +1,7 @@
 let dishForm = document.querySelectorAll(".di-formset")
 let container = document.querySelector("#form-container")
 let addButton = document.querySelector("#add-ingredient")
-let totalForms = document.querySelector("#id_di-TOTAL_FORMS")
+let totalForms = document.querySelectorAll("input[name=di-TOTAL_FORMS]")
 
 let formNum = dishForm.length - 1
 
@@ -15,5 +15,6 @@ addButton.addEventListener('click', (e) => {
     newForm.innerHTML = newForm.innerHTML.replace(formRegex, `di-${formNum}-`)
     container.insertBefore(newForm, addButton)
 
-    totalForms.setAttribute('value', `${formNum+1}`)
+    totalForms = document.querySelectorAll("input[name=di-TOTAL_FORMS]")
+    totalForms.forEach(e => e.setAttribute('value', `${formNum+1}`))
 })

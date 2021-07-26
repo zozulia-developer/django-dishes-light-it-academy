@@ -26,7 +26,8 @@ class OrderIngredientsForm(forms.ModelForm):
         exclude = ()
         widgets = {
             'dish': forms.Select(attrs={
-                'class': 'form-select'
+                'class': 'form-select',
+                'disabled': True
             }),
         }
 
@@ -56,7 +57,7 @@ DishIngredientFormset = inlineformset_factory(
     },
     widgets={
         'ingredient': forms.Select(attrs={'class': 'form-select'}),
-        'amount': forms.NumberInput(attrs={'class': 'form-control'}),
+        'amount': forms.NumberInput(attrs={'class': 'form-control mb-3'}),
     },
     exclude=[],
     fk_name='dish',
@@ -73,7 +74,7 @@ OrderIngredientFormset = inlineformset_factory(
     },
     widgets={
         'ingredient': forms.Select(attrs={'class': 'form-select'}),
-        'amount': forms.NumberInput(attrs={'class': 'form-control'}),
+        'amount': forms.NumberInput(attrs={'class': 'form-control mb-4'}),
     },
     exclude=[],
     fk_name='order',

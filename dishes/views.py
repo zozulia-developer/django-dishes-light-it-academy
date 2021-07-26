@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 from .forms import OrderIngredientsForm, DishIngredientsForm, DishIngredientFormset, IngredientForm, \
     OrderIngredientFormset
-from .models import Dish, Ingredient, Order
+from .models import Dish, Ingredient, Order, DishIngredient
 
 
 class SearchResultsView(ListView):
@@ -79,6 +79,12 @@ class IngredientCreateView(CreateView):
     form_class = IngredientForm
 
 
+class OrderListView(ListView):
+    model = Order
+    template_name = 'dishes/orders.html'
+    context_object_name = 'orders'
+
+
 class OrderIngredientCreateView(CreateView):
     model = Order
     success_url = reverse_lazy('dishes:index')
@@ -86,10 +92,19 @@ class OrderIngredientCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(OrderIngredientCreateView, self).get_context_data()
+        id = self.request.GET.get('id')
         if self.request.POST:
             context['oi_formset'] = OrderIngredientFormset(self.request.POST)
         else:
+            context['form'].fields['dish'].queryset = Dish.objects.filter(pk=id)
+            context['form'].fields['dish'].empty_label = None
             context['oi_formset'] = OrderIngredientFormset()
+            print(context)
+            print(dir(context['oi_formset']))
+            context['oi_formset'].queryset = DishIngredient.objects.filter(dish=id)
+            print(context['oi_formset'].queryset)
+            print(context['oi_formset'].forms[-1])
+            del context['oi_formset'].forms[-1]
         return context
 
     def form_valid(self, form):
