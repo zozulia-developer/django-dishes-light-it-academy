@@ -10,7 +10,9 @@
       <li>{{ ingredient.ingredient }} - {{ ingredient.amount }}</li>
     {% endfor %}
   </ul>
+  <p class="text-muted">Created at: {{ dish.created_at }}</p>
   <div class="col-12">
     <a class="btn btn-primary" href="{% url 'dishes:create_order' %}?id={{dish.id}}">Make Order</a>
+    <a href="{% url 'dishes:index' %}" class="btn btn-primary">Go Back</a>
   </div>
 {% endblock %}

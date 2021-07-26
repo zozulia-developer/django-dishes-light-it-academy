@@ -85,6 +85,12 @@ class OrderListView(ListView):
     context_object_name = 'orders'
 
 
+class OrderDetailView(DetailView):
+    model = Order
+    template_name = 'dishes/order_details.html'
+    context_object_name = 'order'
+
+
 class OrderIngredientCreateView(CreateView):
     model = Order
     success_url = reverse_lazy('dishes:index')
@@ -95,15 +101,12 @@ class OrderIngredientCreateView(CreateView):
         id = self.request.GET.get('id')
         if self.request.POST:
             context['oi_formset'] = OrderIngredientFormset(self.request.POST)
+            del context['oi_formset'].forms[-1]
         else:
             context['form'].fields['dish'].queryset = Dish.objects.filter(pk=id)
             context['form'].fields['dish'].empty_label = None
             context['oi_formset'] = OrderIngredientFormset()
-            print(context)
-            print(dir(context['oi_formset']))
             context['oi_formset'].queryset = DishIngredient.objects.filter(dish=id)
-            print(context['oi_formset'].queryset)
-            print(context['oi_formset'].forms[-1])
             del context['oi_formset'].forms[-1]
         return context
 

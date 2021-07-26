@@ -7,20 +7,14 @@
         {% csrf_token %}
         {{ form.as_p }}
         <hr>
-        <div class="di-formset">
+        <div class="di-formset p-3 mb-4 border">
             {{ di_formset }}
         </div>
         <button id="add-ingredient" class="btn btn-primary mt-1">+ Add ingredient</button>
         <hr>
-        <button class="btn btn-primary btn-lg btn-block mt-2">Create Dish</button>
+        <div class="d-grid gap-2">
+            <button class="btn btn-primary mt-2">Create Dish</button>
+        </div>
     </form>
-<!--    <script src="{% static 'dishes/js/jquery.formset.js' %}"></script>-->
     <script src="{% static 'dishes/js/index.js' %}"></script>
-<!--    <script>-->
-<!--        $(function() {-->
-<!--            $('#form-container .di-formset').formset({-->
-<!--                prefix: '{{ di_formset.prefix }}'-->
-<!--            })-->
-<!--        })-->
-<!--    </script>-->
 {% endblock %}

@@ -4,15 +4,15 @@
 
 {% block content %}
 <div class="row mb-1">
-    <div class="col-5">
+    <div class="col-6">
         <a href="{% url 'dishes:create_dish' %}" class="btn btn-primary">Create Dish</a>
     </div>
-    <div class="col-7">
+    <div class="col-6">
         <form action="{% url 'dishes:search_results' %}" method="get">
             <div class="input-group">
                 <input class="form-control" name="q" type="text" placeholder="Search...">
                 <span class="input-group-btn">
-                        <button class="btn btn-primary">Search</button>
+                        <button class="btn btn-primary">Search Dish</button>
                     </span>
             </div>
         </form>
@@ -22,8 +22,8 @@
 <div class="row">
     <div class="col-7 border">
         {% for dish in dishes %}
-        <p>Dish name: {{ dish.name }}</p>
-        <p>Created at: {{ dish.created_at }}</p>
+        <p>Dish name: <span class="fw-bold">{{ dish.name }}</span></p>
+        <p class="text-muted">Created at: {{ dish.created_at }}</p>
         <a href="{% url 'dishes:details' dish.id %}">Details</a>
         <hr>
         {% endfor %}
@@ -32,7 +32,7 @@
         {% endif %}
     </div>
     <div class="col-5 border">
-        <h3>Filters:</h3>
+        <h3 class="mt-2">Filters:</h3>
         <hr>
         <form action="{% url 'dishes:index' %}" class="mb-4">
             <p>from:
