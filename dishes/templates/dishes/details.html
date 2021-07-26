@@ -11,6 +11,6 @@
     {% endfor %}
   </ul>
   <div class="col-12">
-    <a class="btn btn-primary" href="{% url 'dishes:create_order' %}">Make Order</a>
+    <a class="btn btn-primary" href="{% url 'dishes:create_order' %}?id={{dish.id}}">Make Order</a>
   </div>
 {% endblock %}
