@@ -43,7 +43,8 @@ class DishIngredientsForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Enter dish name'
+                'placeholder': 'Enter dish name',
+                'readonly': 'readonly'
             })
         }
 

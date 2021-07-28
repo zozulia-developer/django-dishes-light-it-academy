@@ -107,6 +107,7 @@ class OrderIngredientCreateView(CreateView):
             context['form'].fields['dish'].empty_label = None
             context['oi_formset'] = OrderIngredientFormset()
             context['oi_formset'].queryset = DishIngredient.objects.filter(dish=id)
+            # print(dir(context['oi_formset']))
             del context['oi_formset'].forms[-1]
         return context
 
