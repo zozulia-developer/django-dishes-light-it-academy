@@ -27,7 +27,7 @@ class OrderIngredientsForm(forms.ModelForm):
         widgets = {
             'dish': forms.Select(attrs={
                 'class': 'form-select',
-                #'disabled': True
+                # 'disabled': True
             }),
         }
 

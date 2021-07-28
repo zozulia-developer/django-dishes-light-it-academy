@@ -4,6 +4,7 @@
 
 {% block content %}
   <p><u>Order id: <span class="fw-bold">{{ order.id }}</span></u></p>
+  <p>Dish: <span class="fw-bold">{{ order.dish }}</span></p>
   <p>Ingredients:</p>
   <ul>
     {% for ingredient in order.oi.all %}

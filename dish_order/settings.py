@@ -141,7 +141,7 @@ LOGGING = {
             'class': 'logging.handlers.RotatingFileHandler',
             'filename': os.path.join(BASE_DIR, 'dishes.log'),
             'maxBytes': 5242880,  # 1024 * 1024 * 5B = 5MB
-            'backupCount': 1,
+            'backupCount': 3,
             'formatter': '',
         },
     },

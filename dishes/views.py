@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
@@ -93,7 +93,7 @@ class OrderDetailView(DetailView):
 
 class OrderIngredientCreateView(CreateView):
     model = Order
-    success_url = reverse_lazy('dishes:index')
+    success_url = reverse_lazy('dishes:orders')
     form_class = OrderIngredientsForm
 
     def get_context_data(self, **kwargs):
@@ -101,14 +101,14 @@ class OrderIngredientCreateView(CreateView):
         id = self.request.GET.get('id')
         if self.request.POST:
             context['oi_formset'] = OrderIngredientFormset(self.request.POST)
-            del context['oi_formset'].forms[-1]
         else:
-            context['form'].fields['dish'].queryset = Dish.objects.filter(pk=id)
+            dish_name = Dish.objects.filter(pk=id)
+            context['form'].fields['dish'].queryset = dish_name
             context['form'].fields['dish'].empty_label = None
+
             context['oi_formset'] = OrderIngredientFormset()
-            context['oi_formset'].queryset = DishIngredient.objects.filter(dish=id)
             # print(dir(context['oi_formset']))
-            del context['oi_formset'].forms[-1]
+            # context['oi_formset'].queryset = DishIngredient.objects.filter(dish=id)
         return context
 
     def form_valid(self, form):
