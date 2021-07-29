@@ -1,0 +1,20 @@
+[
+  {
+    "model": "dishes.dish",
+    "pk": 1,
+    "fields": {
+      "name": "First dish",
+      "created_at": "2021-01-01",
+      "updated_at": "2021-01-01"
+    }
+  },
+  {
+    "model": "dishes.dish",
+    "pk": 2,
+    "fields": {
+      "name": "Second dish",
+      "created_at": "2021-01-01",
+      "updated_at": "2021-01-01"
+    }
+  }
+]
