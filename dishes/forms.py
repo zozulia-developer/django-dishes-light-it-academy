@@ -18,6 +18,19 @@ class IngredientForm(forms.ModelForm):
             })
         }
 
+    def clean_name(self):
+        name = self.cleaned_data['name']
+        if not name:
+            return name
+
+        if len(name) > 50:
+            raise ValidationError('Ingredient name length should be less than 50 symbols!')
+
+        if not name[0].isupper():
+            raise ValidationError('Should start with an uppercase letter!')
+
+        return name
+
 
 class OrderIngredientsForm(forms.ModelForm):
     class Meta:
@@ -44,7 +57,6 @@ class DishIngredientsForm(forms.ModelForm):
             'name': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Enter dish name',
-                'readonly': 'readonly'
             })
         }
 
