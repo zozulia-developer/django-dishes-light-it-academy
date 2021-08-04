@@ -8,7 +8,10 @@
         {{ form.as_p }}
         <hr>
         <div class="di-formset">
-            {{ oi_formset }}
+            {{ oi_formset.management_form }}
+            {% for oi in oi_formset %}
+                {{ oi }}
+            {% endfor %}
         </div>
         <div class="d-grid gap-2">
             <button class="btn btn-primary btn-lg btn-block">Create Order</button>

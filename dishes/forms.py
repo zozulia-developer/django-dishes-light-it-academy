@@ -86,11 +86,11 @@ OrderIngredientFormset = inlineformset_factory(
         'amount': 'Ingredient Amount'
     },
     widgets={
-        'ingredient': forms.Select(attrs={'class': 'form-select'}),
+        'ingredient': forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
         'amount': forms.NumberInput(attrs={'class': 'form-control mb-4'}),
     },
     exclude=[],
     fk_name='order',
-    extra=1,
+    # extra=1,
     can_delete=False
 )

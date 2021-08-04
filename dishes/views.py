@@ -103,12 +103,20 @@ class OrderIngredientCreateView(CreateView):
             context['oi_formset'] = OrderIngredientFormset(self.request.POST)
         else:
             dish_name = Dish.objects.filter(pk=id)
+            ingredients_queryset = DishIngredient.objects.filter(dish=id)
+
+            ingredients = [n.ingredient.id for n in ingredients_queryset.all()]
+            amounts = [n.amount for n in ingredients_queryset.all()]
+            data = dict(zip(ingredients, amounts))
+            initial_data = [{'ingredient': i, 'amount': j} for i, j in data.items()]
+
             context['form'].fields['dish'].queryset = dish_name
             context['form'].fields['dish'].empty_label = None
 
-            context['oi_formset'] = OrderIngredientFormset()
-            # print(dir(context['oi_formset']))
-            # context['oi_formset'].queryset = DishIngredient.objects.filter(dish=id)
+            initial_formsets = OrderIngredientFormset(initial=initial_data)
+            initial_formsets.extra = len(initial_data)
+
+            context['oi_formset'] = initial_formsets
         return context
 
     def form_valid(self, form):
