@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from accounts.views import LoginFormView
+from accounts.views import LoginFormView, SignUpFormView
 
 from .views import redirect_dishes
 
@@ -24,5 +24,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('login/', LoginFormView.as_view(), name='login'),
+    path('sign-up/', SignUpFormView.as_view(), name='sign-up'),
     path('dishes/', include('dishes.urls')),
 ]
