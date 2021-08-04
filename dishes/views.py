@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
@@ -43,7 +44,7 @@ class DishDetailView(DetailView):
     context_object_name = 'dish'
 
 
-class DishIngredientCreateView(CreateView):
+class DishIngredientCreateView(LoginRequiredMixin, CreateView):
     model = Dish
     success_url = reverse_lazy('dishes:index')
     form_class = DishIngredientsForm
@@ -74,7 +75,7 @@ class IngredientListView(ListView):
     context_object_name = 'ingredients'
 
 
-class IngredientCreateView(CreateView):
+class IngredientCreateView(LoginRequiredMixin, CreateView):
     template_name = 'dishes/create_ingredient.html'
     form_class = IngredientForm
 
@@ -91,7 +92,7 @@ class OrderDetailView(DetailView):
     context_object_name = 'order'
 
 
-class OrderIngredientCreateView(CreateView):
+class OrderIngredientCreateView(LoginRequiredMixin, CreateView):
     model = Order
     success_url = reverse_lazy('dishes:orders')
     form_class = OrderIngredientsForm
