@@ -13,6 +13,8 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+from celery.schedules import crontab
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
@@ -129,6 +131,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Logging config
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -151,6 +154,21 @@ LOGGING = {
     }
 }
 
+# LOGIN URL's
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'
+
+# CELERY config
+CELERY_ENABLE_UTC = False
+CELERY_TIMEZONE = 'Europe/Kiev'
+CELERY_BROKER_URL = 'redis://localhost'
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
+CELERY_BEAT_SCHEDULE = {
+    'report-every-day-22pm': {
+        'task': 'tasks.report_csv',
+        'schedule': crontab(hour=22, minute=0)
+    }
+}
