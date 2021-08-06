@@ -1,18 +1,20 @@
 {% extends 'base.html' %}
 
-{% block header %}Dishes List{% endblock %}
+{% load i18n %}
+
+{% block header %}{% translate 'Dishes List' %}{% endblock %}
 
 {% block content %}
 <div class="row mb-1">
     <div class="col-6">
-        <a href="{% url 'dishes:create_dish' %}" class="btn btn-primary">Create Dish</a>
+        <a href="{% url 'dishes:create_dish' %}" class="btn btn-primary">{% translate 'Create Dish' %}</a>
     </div>
     <div class="col-6">
         <form action="{% url 'dishes:search_results' %}" method="get">
             <div class="input-group">
-                <input class="form-control" name="q" type="text" placeholder="Search...">
+                <input class="form-control" name="q" type="text" placeholder="{% translate 'Search' %}...">
                 <span class="input-group-btn">
-                        <button class="btn btn-primary">Search Dish</button>
+                        <button class="btn btn-primary">{% translate 'Search Dish' %}</button>
                     </span>
             </div>
         </form>
@@ -22,26 +24,26 @@
 <div class="row">
     <div class="col-7 border">
         {% for dish in dishes %}
-        <p>Dish name: <span class="fw-bold">{{ dish.name }}</span></p>
-        <p class="text-muted">Created at: {{ dish.created_at }}</p>
-        <a href="{% url 'dishes:details' dish.id %}">Details</a>
+        <p>{% translate 'Dish name' %}: <span class="fw-bold">{{ dish.name }}</span></p>
+        <p class="text-muted">{% translate 'Created at' %}: {{ dish.created_at }}</p>
+        <a href="{% url 'dishes:details' dish.id %}">{% translate 'Details' %}</a>
         <hr>
         {% endfor %}
         {% if dishes|length == 0 %}
-        <h2 class="text-warning">Oops! No Results!</h2>
+        <h2 class="text-warning">{% translate 'Oops! No Results!' %}</h2>
         {% endif %}
     </div>
     <div class="col-5 border">
-        <h3 class="mt-2">Filters:</h3>
+        <h3 class="mt-2">{% translate 'Filters' %}: </h3>
         <hr>
         <form action="{% url 'dishes:index' %}" class="mb-4">
-            <p>from:
+            <p>{% translate 'from' %}:
                 <input type="date" class="form-control" name="from" required>
             </p>
-            to:
+            {% translate 'to' %}:
             <input type="date" class="form-control mb-1" name="to" required>
             <div class="d-flex justify-content-end">
-                <button class="btn btn-primary">Filter by date</button>
+                <button class="btn btn-primary">{% translate 'Filter by date' %}</button>
             </div>
         </form>
         <hr>
@@ -50,14 +52,14 @@
                 <input id="radio-desc" class="form-check-input" value="desc" type="radio" name="filter"
                        onclick="this.form.submit()">
                 <label class="form-check-label" for="radio-desc">
-                    Created At Descending Sort
+                    {% translate 'Created At Descending Sort' %}
                 </label>
             </div>
             <div class="form-check">
                 <input id="radio-asc" class="form-check-input" value="asc" type="radio" name="filter"
                        onclick="this.form.submit()" checked>
                 <label class="form-check-label" for="radio-asc">
-                    Created At Ascending Sort
+                    {% translate 'Created At Ascending Sort' %}
                 </label>
             </div>
         </form>

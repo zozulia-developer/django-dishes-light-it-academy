@@ -110,7 +110,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
 LOCALE_PATHS = [
-    os.path.join(BASE_DIR, 'locale')
+    os.path.join(BASE_DIR, 'locale'),
+    os.path.join(BASE_DIR, 'dishes/locale')
 ]
 
 LANGUAGES = [
@@ -182,7 +183,7 @@ CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
 CELERY_BEAT_SCHEDULE = {
     'report-every-day-22pm': {
-        'task': 'tasks.report_csv',
+        'task': 'dishes.tasks.report_csv',
         'schedule': 5.0,  # crontab(hour=22, minute=0)
     }
 }
