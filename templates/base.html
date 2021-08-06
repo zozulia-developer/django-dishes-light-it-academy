@@ -34,10 +34,10 @@
 
         {% get_current_language_bidi as LANGUAGE_BIDI %}
         {% get_current_language as LANGUAGE_CODE %}
-        <div class="col-3 mt-4 mb-4">
-            <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+        <div class="col-4 mt-4 mb-4">
+            <form id="lang-form" action="{% url 'set_language' %}" method="post">{% csrf_token %}
                 <div class="input-group">
-                    <select class="form-select me-1" name="language">
+                    <select id="select-lang" class="form-select me-1" name="language">
                         {% get_available_languages as LANGUAGES %}
                         {% get_language_info_list for LANGUAGES as languages %}
                         {% for language in languages %}
@@ -54,12 +54,12 @@
         </div>
 
         {% if user.is_authenticated %}
-        <div class="col-4 d-flex justify-content-end">
+        <div class="col-3 d-flex justify-content-end">
             <span class="mb-4 mt-4 me-2">{% translate 'Welcome' %}, <b>{{ user.username }}</b>!</span>
             <a href="{% url 'logout' %}" class="btn btn-danger mb-4 mt-4">{% translate 'LOGOUT' %}</a>
         </div>
         {% else %}
-        <div class="col-4 d-flex justify-content-end">
+        <div class="col-3 d-flex justify-content-end">
             <a class="btn btn-success mb-4 mt-4 me-2" href="{% url 'login' %}">{% translate 'SIGN IN' %}</a>
             <a class="btn btn-light mb-4 mt-4" href="{% url 'sign-up' %}">{% translate 'SIGN UP' %}</a>
         </div>
@@ -76,5 +76,21 @@
         </main>
     </div>
 </div>
+<script>
+    let changeLangButton = document.querySelector('#change-lang')
+    let langForm = document.querySelector('#lang-form')
+    if (sessionStorage.length != 0) {
+        document.querySelector('#select-lang').value = sessionStorage.getItem('lang')
+    }
+
+    changeLangButton.addEventListener('click', (e) => {
+        e.preventDefault()
+        let select = document.querySelector('#select-lang')
+        let selectValue = select.value
+
+        sessionStorage.setItem('lang', selectValue)
+        langForm.submit()
+    })
+</script>
 </body>
 </html>
