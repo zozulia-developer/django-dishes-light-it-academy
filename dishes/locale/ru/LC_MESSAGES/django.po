@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 13:28+0000\n"
+"POT-Creation-Date: 2021-08-06 14:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,13 +20,81 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: dishes/templates/dishes/index.html:5
-msgid "Dishes List"
-msgstr "Список Блюд"
+#: dishes/forms.py:13
+msgid "Ingredient Name"
+msgstr "Название ингредиента"
 
+#: dishes/forms.py:18
+msgid "Enter ingredient name"
+msgstr "Введите название ингредиента"
+
+#: dishes/forms.py:28
+msgid "Ingredient name length should be less than 50 symbols!"
+msgstr "Длина названия ингредиента должна быть меньше 50 смиволов!"
+
+#: dishes/forms.py:31
+msgid "Should start with an uppercase letter!"
+msgstr "Должно начинаться с заглавной буквы!"
+
+#: dishes/forms.py:55
+msgid "Dish Name"
+msgstr "Название блюда"
+
+#: dishes/forms.py:60
+msgid "Enter dish name"
+msgstr "Введите название блюда"
+
+#: dishes/forms.py:69 dishes/forms.py:86
+#: dishes/templates/dishes/ingredients.html:13
+msgid "Ingredient name"
+msgstr "Название ингредиента"
+
+#: dishes/forms.py:70 dishes/forms.py:87
+msgid "Ingredient Amount"
+msgstr "Количество ингредиента"
+
+#: dishes/templates/dishes/create_ingredient.html:5
+#: dishes/templates/dishes/create_ingredient.html:11
+#: dishes/templates/dishes/ingredients.html:8
+msgid "Create Ingredient"
+msgstr "Создать Ингредиент"
+
+#: dishes/templates/dishes/details.html:5
+msgid "Dish Details"
+msgstr "Детали Блюда"
+
+#: dishes/templates/dishes/details.html:8 dishes/templates/dishes/index.html:27
+msgid "Dish name"
+msgstr "Название блюда"
+
+#: dishes/templates/dishes/details.html:9
+#: dishes/templates/dishes/order_details.html:8
+msgid "Ingredients"
+msgstr "Ингредиенты"
+
+#: dishes/templates/dishes/details.html:15
+#: dishes/templates/dishes/index.html:28
+#: dishes/templates/dishes/order_details.html:14
+msgid "Created at"
+msgstr "Создано в"
+
+#: dishes/templates/dishes/details.html:17
+msgid "Make Order"
+msgstr "Создать заказ"
+
+#: dishes/templates/dishes/dish_form.html:4
+#: dishes/templates/dishes/dish_form.html:17
 #: dishes/templates/dishes/index.html:10
 msgid "Create Dish"
 msgstr "Создать блюдо"
+
+#: dishes/templates/dishes/dish_form.html:14
+msgid "+ Add ingredient"
+msgstr "+ Добавить ингредиент"
+
+#: dishes/templates/dishes/index.html:5
+msgid "Dishes List"
+msgstr "Список Блюд"
 
 #: dishes/templates/dishes/index.html:15
 msgid "Search"
@@ -36,19 +104,12 @@ msgstr "Поиск"
 msgid "Search Dish"
 msgstr "Найти блюдо"
 
-#: dishes/templates/dishes/index.html:27
-msgid "Dish name"
-msgstr "Название блюда"
-
-#: dishes/templates/dishes/index.html:28
-msgid "Created at"
-msgstr "Создано в"
-
-#: dishes/templates/dishes/index.html:29
+#: dishes/templates/dishes/index.html:29 dishes/templates/dishes/orders.html:10
 msgid "Details"
 msgstr "Детали"
 
 #: dishes/templates/dishes/index.html:33
+#: dishes/templates/dishes/search_results.html:13
 msgid "Oops! No Results!"
 msgstr "Упс! Ничего не найдено!"
 
@@ -75,3 +136,50 @@ msgstr "Создано в По убыванию"
 #: dishes/templates/dishes/index.html:62
 msgid "Created At Ascending Sort"
 msgstr "Создано в По возрастанию"
+
+#: dishes/templates/dishes/ingredients.html:3
+msgid "Ingredients List"
+msgstr "Список ингредиентов"
+
+#: dishes/templates/dishes/ingredients.html:16
+#: dishes/templates/dishes/order_details.html:16
+#: dishes/templates/dishes/orders.html:16
+#: dishes/templates/dishes/search_results.html:14
+msgid "Go Back"
+msgstr "Назад"
+
+#: dishes/templates/dishes/order_details.html:3
+#, fuzzy
+#| msgid "Details"
+msgid "Order Details"
+msgstr "Детали"
+
+#: dishes/templates/dishes/order_details.html:6
+#: dishes/templates/dishes/orders.html:9
+msgid "Order id"
+msgstr "Номер заказа"
+
+#: dishes/templates/dishes/order_details.html:7
+#: dishes/templates/dishes/search_results.html:8
+msgid "Dish"
+msgstr "Блюдо"
+
+#: dishes/templates/dishes/order_form.html:3
+msgid "Create Ingredients Order"
+msgstr "Создать Заказ Ингредиентов"
+
+#: dishes/templates/dishes/order_form.html:17
+msgid "Create Order"
+msgstr "Создать заказ"
+
+#: dishes/templates/dishes/orders.html:3
+msgid "Orders List"
+msgstr "Список Заказов"
+
+#: dishes/templates/dishes/orders.html:15
+msgid "Oops! There is no information yet!"
+msgstr "Упс! Не найдено информации!"
+
+#: dishes/templates/dishes/search_results.html:3
+msgid "Search Results"
+msgstr "Найти блюдо"

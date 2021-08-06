@@ -1,5 +1,6 @@
 from django import forms
 from django.forms import ValidationError, inlineformset_factory
+from django.utils.translation import ugettext_lazy as _
 
 from .models import Dish, OrderIngredient, DishIngredient, Ingredient, Order
 
@@ -9,12 +10,12 @@ class IngredientForm(forms.ModelForm):
         model = Ingredient
         fields = ['name']
         labels = {
-            'name': 'Ingredient Name'
+            'name': _('Ingredient Name')
         }
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Enter ingredient name'
+                'placeholder': _('Enter ingredient name')
             })
         }
 
@@ -24,10 +25,10 @@ class IngredientForm(forms.ModelForm):
             return name
 
         if len(name) > 50:
-            raise ValidationError('Ingredient name length should be less than 50 symbols!')
+            raise ValidationError(_('Ingredient name length should be less than 50 symbols!'))
 
         if not name[0].isupper():
-            raise ValidationError('Should start with an uppercase letter!')
+            raise ValidationError(_('Should start with an uppercase letter!'))
 
         return name
 
@@ -51,12 +52,12 @@ class DishIngredientsForm(forms.ModelForm):
         fields = ['name']
         exclude = ()
         labels = {
-            'name': 'Dish Name'
+            'name': _('Dish Name')
         }
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Enter dish name',
+                'placeholder': _('Enter dish name'),
             })
         }
 
@@ -65,8 +66,8 @@ DishIngredientFormset = inlineformset_factory(
     Dish, DishIngredient,
     fields=['ingredient', 'amount'],
     labels={
-        'ingredient': 'Ingredient name',
-        'amount': 'Ingredient Amount'
+        'ingredient': _('Ingredient name'),
+        'amount': _('Ingredient Amount')
     },
     widgets={
         'ingredient': forms.Select(attrs={'class': 'form-select'}),
@@ -82,8 +83,8 @@ OrderIngredientFormset = inlineformset_factory(
     Order, OrderIngredient,
     fields=['ingredient', 'amount'],
     labels={
-        'ingredient': 'Ingredient name',
-        'amount': 'Ingredient Amount'
+        'ingredient': _('Ingredient name'),
+        'amount': _('Ingredient Amount')
     },
     widgets={
         'ingredient': forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),

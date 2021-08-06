@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block header %}Create Dish{% endblock %}
+{% load i18n %}
+{% block header %}{% translate 'Create Dish' %}{% endblock %}
 
 {% block content %}
     <form id="form-container" action="" method="post">
@@ -10,10 +11,10 @@
         <div class="di-formset p-3 mb-4 border">
             {{ di_formset }}
         </div>
-        <button id="add-ingredient" class="btn btn-primary mt-1">+ Add ingredient</button>
+        <button id="add-ingredient" class="btn btn-primary mt-1">{% translate '+ Add ingredient' %}</button>
         <hr>
         <div class="d-grid gap-2">
-            <button class="btn btn-primary mt-2">Create Dish</button>
+            <button class="btn btn-primary mt-2">{% translate 'Create Dish' %}</button>
         </div>
     </form>
     <script src="{% static 'dishes/js/index.js' %}"></script>

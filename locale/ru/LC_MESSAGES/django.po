@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 13:28+0000\n"
+"POT-Creation-Date: 2021-08-06 14:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: templates/base.html:20
 msgid "Dish Order"
-msgstr "Заказы ингридиентов"
+msgstr "Заказать ингредиенты"
 
 #: templates/base.html:27
 msgid "DISHES"
@@ -36,19 +36,24 @@ msgstr "ИНГРЕДИЕНТЫ"
 msgid "ORDERS"
 msgstr "ЗАКАЗЫ"
 
-#: templates/base.html:54
+#: templates/base.html:50
+#: venv/lib/python3.8/site-packages/django/forms/widgets.py:405
+msgid "Change"
+msgstr "Изменить"
+
+#: templates/base.html:58
 msgid "Welcome"
 msgstr "Добро пожаловать"
 
-#: templates/base.html:55
+#: templates/base.html:59
 msgid "LOGOUT"
 msgstr "ВЫЙТИ"
 
-#: templates/base.html:59
+#: templates/base.html:63
 msgid "SIGN IN"
 msgstr "ВОЙТИ"
 
-#: templates/base.html:60
+#: templates/base.html:64
 msgid "SIGN UP"
 msgstr "РЕГИСТРАЦИЯ"
 
@@ -679,10 +684,6 @@ msgstr ""
 
 #: venv/lib/python3.8/site-packages/django/forms/widgets.py:404
 msgid "Currently"
-msgstr ""
-
-#: venv/lib/python3.8/site-packages/django/forms/widgets.py:405
-msgid "Change"
 msgstr ""
 
 #: venv/lib/python3.8/site-packages/django/forms/widgets.py:714

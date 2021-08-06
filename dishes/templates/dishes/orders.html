@@ -1,18 +1,18 @@
 {% extends 'base.html' %}
-
-{% block header %}Orders List{% endblock %}
+{% load i18n %}
+{% block header %}{% translate 'Orders List' %}{% endblock %}
 
 {% block content %}
 <hr>
 {% for order in orders %}
 <p>
-    Order id: <span class="fw-bold">{{ order.id }}</span>
-    <a href="{% url 'dishes:order_details' order.id%}">Details</a>
+    {% translate 'Order id' %}: <span class="fw-bold">{{ order.id }}</span>
+    <a href="{% url 'dishes:order_details' order.id%}">{% translate 'Details' %}</a>
 </p>
 <hr>
 {% endfor %}
 {% if orders|length == 0 %}
-<h2 class="text-warning">Oops! There is no information yet!</h2>
-<a href="{% url 'dishes:index' %}" class="btn btn-primary">Go Back</a>
+<h2 class="text-warning">{% translate 'Oops! There is no information yet!' %}</h2>
+<a href="{% url 'dishes:index' %}" class="btn btn-primary">{% translate 'Go Back' %}</a>
 {% endif %}
 {% endblock %}

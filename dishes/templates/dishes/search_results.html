@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
-
-{% block header %}Search Results{% endblock %}
+{% load i18n %}
+{% block header %}{% translate 'Search Results' %}{% endblock %}
 
 {% block content %}
 {% for dish in object_list %}
 <p>
-    Dish: <a href="{% url 'dishes:details' dish.id %}">{{ dish }}</a>
+    {% translate 'Dish' %}: <a href="{% url 'dishes:details' dish.id %}">{{ dish }}</a>
 </p>
 <hr>
 {% endfor %}
 {% if object_list|length == 0 %}
-<h2 class="text-warning">Oops! No Results!</h2>
-<a href="{% url 'dishes:index' %}" class="btn btn-primary">Go Back</a>
+<h2 class="text-warning">{% translate 'Oops! No Results!' %}</h2>
+<a href="{% url 'dishes:index' %}" class="btn btn-primary">{% translate 'Go Back' %}</a>
 {% endif %}
 {% endblock %}

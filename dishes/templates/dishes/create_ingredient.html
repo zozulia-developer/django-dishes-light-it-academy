@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 
-{% block header %}Create Ingredient{% endblock %}
+{% load i18n %}
+
+{% block header %}{% translate 'Create Ingredient' %}{% endblock %}
 
 {% block content %}
     <form action="" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button class="btn btn-primary btn-lg btn-block">Create Ingredient</button>
+        <button class="btn btn-primary btn-lg btn-block">{% translate 'Create Ingredient' %}</button>
     </form>
 {% endblock %}

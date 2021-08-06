@@ -1,18 +1,18 @@
 {% extends 'base.html' %}
-
-{% block header %}Order Details{% endblock %}
+{% load i18n %}
+{% block header %}{% translate 'Order Details' %}{% endblock %}
 
 {% block content %}
-  <p><u>Order id: <span class="fw-bold">{{ order.id }}</span></u></p>
-  <p>Dish: <span class="fw-bold">{{ order.dish }}</span></p>
-  <p>Ingredients:</p>
+  <p><u>{% translate 'Order id' %}: <span class="fw-bold">{{ order.id }}</span></u></p>
+  <p>{% translate 'Dish' %}: <span class="fw-bold">{{ order.dish }}</span></p>
+  <p>{% translate 'Ingredients' %}:</p>
   <ul>
     {% for ingredient in order.oi.all %}
       <li>{{ ingredient.ingredient }} - {{ ingredient.amount }}</li>
     {% endfor %}
   </ul>
-  <p class="text-muted">Created at: {{ order.created_at }}</p>
+  <p class="text-muted">{% translate 'Created at' %}: {{ order.created_at }}</p>
   <div class="col-12">
-    <a href="{% url 'dishes:orders' %}" class="btn btn-primary">Go Back</a>
+    <a href="{% url 'dishes:orders' %}" class="btn btn-primary">{% translate 'Go Back' %}</a>
   </div>
 {% endblock %}

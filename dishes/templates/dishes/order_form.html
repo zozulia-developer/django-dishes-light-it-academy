@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
-
-{% block header %}Create Ingredients Order{% endblock %}
+{% load i18n %}
+{% block header %}{% translate 'Create Ingredients Order' %}{% endblock %}
 
 {% block content %}
     <form action="" method="post">
@@ -14,7 +14,7 @@
             {% endfor %}
         </div>
         <div class="d-grid gap-2">
-            <button class="btn btn-primary btn-lg btn-block">Create Order</button>
+            <button class="btn btn-primary btn-lg btn-block">{% translate 'Create Order' %}</button>
         </div>
     </form>
 {% endblock %}

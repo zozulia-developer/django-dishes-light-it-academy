@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
-
-{% block header %}Ingredients List{% endblock %}
+{% load i18n %}
+{% block header %}{% translate 'Ingredients List' %}{% endblock %}
 
 {% block content %}
 <div class="row mb-1">
     <div class="col">
-        <a href="{% url 'dishes:create_ingredient' %}" class="btn btn-primary">Create Ingredient</a>
+        <a href="{% url 'dishes:create_ingredient' %}" class="btn btn-primary">{% translate 'Create Ingredient' %}</a>
     </div>
 </div>
 <hr>
 {% for ingredient in ingredients %}
-<p>Ingredient name: {{ ingredient }}</p>
+<p>{% translate 'Ingredient name' %}: {{ ingredient }}</p>
 <hr>
 {% endfor %}
-<a href="{% url 'dishes:index' %}" class="btn btn-primary">Go Back</a>
+<a href="{% url 'dishes:index' %}" class="btn btn-primary">{% translate 'Go Back' %}</a>
 {% endblock %}

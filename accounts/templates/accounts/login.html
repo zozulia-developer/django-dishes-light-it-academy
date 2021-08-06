@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
-
-{% block header %}LOGIN FORM{% endblock %}
+{% load i18n %}
+{% block header %}{% translate 'LOGIN FORM' %}{% endblock %}
 
 {% block content %}
 <div class="col-12">
@@ -23,7 +23,7 @@
                         </div>
                     {% endfor %}
 
-                    <button type="submit" class="btn btn-primary mt-2">Login</button>
+                    <button type="submit" class="btn btn-primary mt-2">{% translate 'Login' %}</button>
             </form>
         </div>
     </div>
