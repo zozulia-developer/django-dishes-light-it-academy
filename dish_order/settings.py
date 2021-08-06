@@ -40,6 +40,9 @@ INSTALLED_APPS = [
 
     'dishes.apps.DishesAppConfig',
     'accounts.apps.AccountsConfig',
+
+    'django_celery_results',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -169,6 +172,6 @@ CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 CELERY_BEAT_SCHEDULE = {
     'report-every-day-22pm': {
         'task': 'tasks.report_csv',
-        'schedule': crontab(hour=22, minute=0)
+        'schedule': 5.0,  # crontab(hour=22, minute=0)
     }
 }

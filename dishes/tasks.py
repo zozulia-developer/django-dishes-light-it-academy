@@ -11,6 +11,7 @@ DATE_TIME_NOW = datetime.now().strftime('%d-%m-%Y_%H:%M:%S')
 
 @shared_task
 def report_csv():
+    print('CELERY TASK!!!')
     title_row = [
         'ORDER_ID',
         'DISH_NAME',
