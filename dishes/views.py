@@ -6,6 +6,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from .forms import OrderIngredientsForm, DishIngredientsForm, DishIngredientFormset, IngredientForm, \
     OrderIngredientFormset
 from .models import Dish, Ingredient, Order, DishIngredient
+from .utils import CacheMixin
 
 
 class SearchResultsView(ListView):
