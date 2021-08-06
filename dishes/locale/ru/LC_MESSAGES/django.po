@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 14:39+0000\n"
+"POT-Creation-Date: 2021-08-06 14:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,9 +76,9 @@ msgstr "Ингредиенты"
 #: dishes/templates/dishes/index.html:28
 #: dishes/templates/dishes/order_details.html:14
 msgid "Created at"
-msgstr "Создано в"
+msgstr "Создано"
 
-#: dishes/templates/dishes/details.html:17
+#: dishes/templates/dishes/details.html :17
 msgid "Make Order"
 msgstr "Создать заказ"
 
@@ -131,11 +131,11 @@ msgstr "Фильтровать по дате"
 
 #: dishes/templates/dishes/index.html:55
 msgid "Created At Descending Sort"
-msgstr "Создано в По убыванию"
+msgstr "Создано По убыванию"
 
 #: dishes/templates/dishes/index.html:62
 msgid "Created At Ascending Sort"
-msgstr "Создано в По возрастанию"
+msgstr "Создано По возрастанию"
 
 #: dishes/templates/dishes/ingredients.html:3
 msgid "Ingredients List"

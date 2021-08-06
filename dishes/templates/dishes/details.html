@@ -15,6 +15,6 @@
   <p class="text-muted">{% translate 'Created at' %}: {{ dish.created_at }}</p>
   <div class="col-12">
     <a class="btn btn-primary" href="{% url 'dishes:create_order' %}?id={{dish.id}}">{% translate 'Make Order' %}</a>
-    <a href="{% url 'dishes:index' %}" class="btn btn-primary">{%' translate 'Go Back' %}</a>
+    <a href="{% url 'dishes:index' %}" class="btn btn-primary">{% translate 'Go Back' %}</a>
   </div>
 {% endblock %}
