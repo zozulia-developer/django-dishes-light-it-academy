@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 14:42+0000\n"
+"POT-Creation-Date: 2021-08-06 20:00+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,34 +20,34 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: accounts/forms.py:10 accounts/forms.py:46
+#: .\accounts\forms.py:10 .\accounts\forms.py:46
 msgid "Username"
 msgstr "Имя пользователя"
 
-#: accounts/forms.py:15
+#: .\accounts\forms.py:15
 msgid "Email"
 msgstr "Почта"
 
-#: accounts/forms.py:20 accounts/forms.py:51
+#: .\accounts\forms.py:20 .\accounts\forms.py:51
 msgid "Password"
 msgstr "Пароль"
 
-#: accounts/forms.py:25
+#: .\accounts\forms.py:25
 msgid "Confirm password"
 msgstr "Подтверждение пароля"
 
-#: accounts/templates/accounts/login.html:3
+#: .\accounts\templates\accounts\login.html:3
 msgid "LOGIN FORM"
 msgstr "ФОРМА АВТОРИЗАЦИИ"
 
-#: accounts/templates/accounts/login.html:26
+#: .\accounts\templates\accounts\login.html:26
 msgid "Login"
 msgstr "Войти"
 
-#: accounts/templates/accounts/signup.html:3
+#: .\accounts\templates\accounts\signup.html:3
 msgid "REGISTER FORM"
 msgstr "ФОРМА РЕГИСТРАЦИИ"
 
-#: accounts/templates/accounts/signup.html:28
+#: .\accounts\templates\accounts\signup.html:28
 msgid "Sign Up"
 msgstr "Зарегистрироваться"
