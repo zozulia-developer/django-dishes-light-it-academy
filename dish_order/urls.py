@@ -21,6 +21,7 @@ from .views import redirect_dishes
 
 urlpatterns = [
     path('', redirect_dishes, name='index'),
+    path('i18n/', include('django.conf.urls.i18n')),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('login/', LoginFormView.as_view(), name='login'),

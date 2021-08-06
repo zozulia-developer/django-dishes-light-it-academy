@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -107,6 +108,16 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
+
+LOCALE_PATH = [
+    os.path.join(BASE_DIR, '/locale')
+]
+
+LANGUAGES = [
+    ('en-us', 'English'),
+    ('uk-UK', 'Ukrainian'),
+    ('ru-RU', 'Russian'),
+]
 
 LANGUAGE_CODE = 'en-us'
 
@@ -175,3 +186,18 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': 5.0,  # crontab(hour=22, minute=0)
     }
 }
+
+# Cache config
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
+        'LOCATION': '127.0.0.1:11211',
+        'TIMEOUT': 3600,
+    },
+    'db_cache': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'my_cache_table',
+    },
+}
+
+CACHE_MIDDLEWARE_SECONDS = 3600
