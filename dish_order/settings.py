@@ -121,7 +121,7 @@ LANGUAGES = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Kiev'
 
 USE_I18N = True
 
@@ -174,16 +174,16 @@ LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'
 
 # CELERY config
-CELERY_ENABLE_UTC = False
-CELERY_TIMEZONE = 'Europe/Kiev'
 CELERY_BROKER_URL = 'redis://localhost'
-CELERY_RESULT_BACKEND = 'django-db'
-CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+CELERY_RESULT_BACKEND = 'redis://localhost'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
 
 CELERY_BEAT_SCHEDULE = {
     'report-every-day-22pm': {
         'task': 'dishes.tasks.report_csv',
-        'schedule': 5.0,  # crontab(hour=22, minute=0)
+        'schedule': 10.0,  # crontab(hour=22, minute=0)
     }
 }
 
