@@ -183,7 +183,7 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_BEAT_SCHEDULE = {
     'report-every-day-22pm': {
         'task': 'dishes.tasks.report_csv',
-        'schedule': 10.0,  # crontab(hour=22, minute=0)
+        'schedule': crontab(hour=22, minute=0)  # 10.0 for test
     }
 }
 
