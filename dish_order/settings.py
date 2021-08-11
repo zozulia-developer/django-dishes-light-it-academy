@@ -43,6 +43,8 @@ INSTALLED_APPS = [
 
     'django_celery_results',
     'django_celery_beat',
+    'rest_framework',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -201,3 +203,10 @@ CACHES = {
 }
 
 CACHE_MIDDLEWARE_SECONDS = 3600
+
+# REST config
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE-SIZE': 10,
+    'DATETIME_FORMAT': '%Y-%m-%d',
+}
