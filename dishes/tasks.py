@@ -39,7 +39,6 @@ def report_csv():
             oi_ingredients = "\n".join(
                 f'{ingr.ingredient.name} - {ingr.amount}' for ingr in order_ingredients
             )
-            print('oi', oi_ingredients)
 
             for ingredient in oi_ingredients:
                 if ingredient not in di_ingredients:

@@ -41,7 +41,6 @@ class OrderIngredientsForm(forms.ModelForm):
         widgets = {
             'dish': forms.Select(attrs={
                 'class': 'form-select',
-                # 'disabled': True
             }),
         }
 
@@ -92,6 +91,5 @@ OrderIngredientFormset = inlineformset_factory(
     },
     exclude=[],
     fk_name='order',
-    # extra=1,
     can_delete=False
 )

@@ -67,12 +67,12 @@ class DishIngredient(models.Model):
     dish = models.ForeignKey(
         'Dish',
         on_delete=models.CASCADE,
-        related_name='di'
+        related_name='dish_ingredient'
     )
     ingredient = models.ForeignKey(
         'Ingredient',
         on_delete=models.CASCADE,
-        related_name='di'
+        related_name='dish_ingredient'
     )
     amount = models.PositiveIntegerField(
         default=1,
@@ -93,12 +93,12 @@ class OrderIngredient(models.Model):
     order = models.ForeignKey(
         'Order',
         on_delete=models.CASCADE,
-        related_name='oi'
+        related_name='order_ingredient'
     )
     ingredient = models.ForeignKey(
         'Ingredient',
         on_delete=models.CASCADE,
-        related_name='oi'
+        related_name='order_ingredient'
     )
     amount = models.PositiveIntegerField(
         default=1,
