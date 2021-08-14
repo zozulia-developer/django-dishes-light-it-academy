@@ -36,10 +36,13 @@ class IngredientForm(forms.ModelForm):
 class OrderIngredientsForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ['dish']
+        fields = ['dish', 'user']
         exclude = ()
         widgets = {
             'dish': forms.Select(attrs={
+                'class': 'form-select',
+            }),
+            'user': forms.Select(attrs={
                 'class': 'form-select',
             }),
         }

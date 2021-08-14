@@ -1,13 +1,19 @@
 from rest_framework import serializers
 
-from dishes.models import Dish
+from dishes.models import Dish, DishIngredient
 
 
-class DishSerializer(serializers.HyperlinkedModelSerializer):
-    name = serializers.CharField(max_length=100)
-    created_at = serializers.DateTimeField(read_only=True)
-    updated_at = serializers.DateTimeField(read_only=True)
+class DishIngredientSerializer(serializers.ModelSerializer):
+    ingredient_name = serializers.ReadOnlyField(source='ingredient.name')
+
+    class Meta:
+        model = DishIngredient
+        fields = ['ingredient_name', 'amount']
+
+
+class DishSerializer(serializers.ModelSerializer):
+    ingredients = DishIngredientSerializer(source='dish_ingredient', many=True)
 
     class Meta:
         model = Dish
-        fields = ['name', 'created_at', 'updated_at']
+        fields = ['name', 'ingredients']

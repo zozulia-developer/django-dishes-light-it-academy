@@ -7,11 +7,11 @@
   <p>{% translate 'Dish' %}: <span class="fw-bold">{{ order.dish }}</span></p>
   <p>{% translate 'Ingredients' %}:</p>
   <ul>
-    {% for ingredient in order.oi.all %}
+    {% for ingredient in order.order_ingredient.all %}
       <li>{{ ingredient.ingredient }} - {{ ingredient.amount }}</li>
     {% endfor %}
   </ul>
-  <p class="text-muted">{% translate 'Created at' %}: {{ order.created_at }}</p>
+  <p class="text-muted">{% translate 'Created at' %}: {{ order.created_at }}, by <b>{{ order.user }}</b></p>
   <div class="col-12">
     <a href="{% url 'dishes:orders' %}" class="btn btn-primary">{% translate 'Go Back' %}</a>
   </div>

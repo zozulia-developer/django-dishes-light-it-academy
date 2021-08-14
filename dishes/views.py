@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
@@ -6,7 +7,6 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from .forms import OrderIngredientsForm, DishIngredientsForm, DishIngredientFormset, IngredientForm, \
     OrderIngredientFormset
 from .models import Dish, Ingredient, Order, DishIngredient
-from .utils import CacheMixin
 
 
 class SearchResultsView(ListView):
@@ -79,6 +79,7 @@ class IngredientListView(ListView):
 class IngredientCreateView(LoginRequiredMixin, CreateView):
     template_name = 'dishes/create_ingredient.html'
     form_class = IngredientForm
+    success_url = reverse_lazy('dishes:ingredients')
 
 
 class OrderListView(ListView):
@@ -105,6 +106,8 @@ class OrderIngredientCreateView(LoginRequiredMixin, CreateView):
             context['oi_formset'] = OrderIngredientFormset(self.request.POST)
         else:
             dish_name = Dish.objects.filter(pk=id)
+            user = self.request.user
+            username = User.objects.filter(username=user)
             ingredients_queryset = DishIngredient.objects.filter(dish=id)
 
             ingredients = [n.ingredient.id for n in ingredients_queryset.all()]
@@ -113,7 +116,9 @@ class OrderIngredientCreateView(LoginRequiredMixin, CreateView):
             initial_data = [{'ingredient': i, 'amount': j} for i, j in data.items()]
 
             context['form'].fields['dish'].queryset = dish_name
+            context['form'].fields['user'].queryset = username
             context['form'].fields['dish'].empty_label = None
+            context['form'].fields['user'].empty_label = None
 
             initial_formsets = OrderIngredientFormset(initial=initial_data)
             initial_formsets.extra = len(initial_data)

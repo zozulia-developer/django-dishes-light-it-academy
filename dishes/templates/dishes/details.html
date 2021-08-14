@@ -8,7 +8,7 @@
   <p>{% translate 'Dish name' %}: {{ dish }}</p>
   <p>{% translate 'Ingredients' %}:</p>
   <ul>
-    {% for ingredient in dish.di.all %}
+    {% for ingredient in dish.dish_ingredient.all %}
       <li>{{ ingredient.ingredient }} - {{ ingredient.amount }}</li>
     {% endfor %}
   </ul>
