@@ -1,12 +1,13 @@
+from django.db.models import Count
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import mixins
-from rest_framework.filters import SearchFilter, OrderingFilter
+from rest_framework.filters import OrderingFilter
 from rest_framework.generics import GenericAPIView
 
 from api.filters import DishDateTimeFilter
 from api.permissions import IsActiveUser
-from api.serializers import DishSerializer
-from dishes.models import Dish
+from api.serializers import DishSerializer, TopDishesSerializer
+from dishes.models import Dish, Order
 
 
 class DishListView(mixins.ListModelMixin,
@@ -42,3 +43,14 @@ class DishDetailView(mixins.RetrieveModelMixin,
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
+
+
+class TopDishesListView(mixins.ListModelMixin, GenericAPIView):
+    queryset = Order.objects\
+                   .values('dish', 'user')\
+                   .annotate(num_order=Count('dish'))\
+                   .order_by('-num_order')[:3]
+    serializer_class = TopDishesSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from api.validators import contain_numbers
-from dishes.models import Dish, DishIngredient, Ingredient
+from dishes.models import Dish, DishIngredient, Ingredient, Order
 
 
 class DishIngredientSerializer(serializers.ModelSerializer):
@@ -23,18 +23,22 @@ class DishSerializer(serializers.ModelSerializer):
         model = Dish
         fields = ['name', 'ingredients', 'created_at', 'updated_at']
 
-    # def create(self, validated_data):
-    #     ingredients_data = validated_data.pop('dish_ingredient')
-    #     ingredient_names = [i['ingredient'] for i in ingredients_data]
-    #     ingredient_amount = [i['amount'] for i in ingredients_data]
-    #     amount_index = 0
-    #     dish = Dish.objects.create(**validated_data)
-    #     dish_id = Dish.objects.filter(name=validated_data['name']).values_list('id', flat=True).last()
-    #
-    #     for ingredient in ingredient_names:
-    #         Ingredient.objects.create(**ingredient)
-    #     for ingredient in ingredient_names:
-    #         ingredient_id = Ingredient.objects.filter(name=ingredient['name']).values_list('id', flat=True).last()
-    #         DishIngredient.objects.create(dish=dish_id, ingredient=ingredient_id, amount=ingredient_amount[amount_index])
-    #         amount_index += 1
-    #     return dish
+
+class IngredientSerializer(serializers.ModelSerializer):
+    def to_representation(self, instance):
+        return instance.name
+
+    class Meta:
+        model = Ingredient
+        fields = ['name']
+
+
+class TopDishesSerializer(serializers.ModelSerializer):
+    dish = serializers.ReadOnlyField()
+    ingredients = IngredientSerializer(read_only=True, many=True)
+    user = serializers.ReadOnlyField()
+    num_order = serializers.IntegerField(read_only=True)
+
+    class Meta:
+        model = Order
+        fields = ['dish', 'ingredients', 'user', 'num_order']
