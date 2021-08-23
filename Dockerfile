@@ -10,4 +10,4 @@ RUN pip install -r requirements.txt
 
 EXPOSE 8000
 
-ENTRYPOINT ['bash', '/app/docker-entrypoint.sh']
+ENTRYPOINT ["bash", "/app/docker-entrypoint.sh"]

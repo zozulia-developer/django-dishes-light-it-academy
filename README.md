@@ -10,3 +10,11 @@
    * python manage.py createcachetable
 4. Запустить Django сервер.
    * python manage.py runserver
+
+## Запуск с Docker
+```
+docker build -f Dockerfile --tag light-it-docker:latest .
+```
+```
+docker run -d -p 8082:8000 light-it-docker
+```

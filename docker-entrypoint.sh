@@ -1,4 +1,5 @@
 #!/bin/bash
+
 echo "Database migration"
 python manage.py migrate
 
