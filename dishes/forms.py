@@ -8,27 +8,29 @@ from .models import Dish, OrderIngredient, DishIngredient, Ingredient, Order
 class IngredientForm(forms.ModelForm):
     class Meta:
         model = Ingredient
-        fields = ['name']
-        labels = {
-            'name': _('Ingredient Name')
-        }
+        fields = ["name"]
+        labels = {"name": _("Ingredient Name")}
         widgets = {
-            'name': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': _('Enter ingredient name')
-            })
+            "name": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": _("Enter ingredient name"),
+                }
+            )
         }
 
     def clean_name(self):
-        name = self.cleaned_data['name']
+        name = self.cleaned_data["name"]
         if not name:
             return name
 
         if len(name) > 50:
-            raise ValidationError(_('Ingredient name length should be less than 50 symbols!'))
+            raise ValidationError(
+                _("Ingredient name length should be less than 50 symbols!")
+            )
 
         if not name[0].isupper():
-            raise ValidationError(_('Should start with an uppercase letter!'))
+            raise ValidationError(_("Should start with an uppercase letter!"))
 
         return name
 
@@ -36,63 +38,71 @@ class IngredientForm(forms.ModelForm):
 class OrderIngredientsForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ['dish', 'user']
+        fields = ["dish", "user"]
         exclude = ()
         widgets = {
-            'dish': forms.Select(attrs={
-                'class': 'form-select',
-            }),
-            'user': forms.Select(attrs={
-                'class': 'form-select',
-            }),
+            "dish": forms.Select(
+                attrs={
+                    "class": "form-select",
+                }
+            ),
+            "user": forms.Select(
+                attrs={
+                    "class": "form-select",
+                }
+            ),
         }
 
 
 class DishIngredientsForm(forms.ModelForm):
     class Meta:
         model = Dish
-        fields = ['name']
+        fields = ["name"]
         exclude = ()
-        labels = {
-            'name': _('Dish Name')
-        }
+        labels = {"name": _("Dish Name")}
         widgets = {
-            'name': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': _('Enter dish name'),
-            })
+            "name": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": _("Enter dish name"),
+                }
+            )
         }
 
 
 DishIngredientFormset = inlineformset_factory(
-    Dish, DishIngredient,
-    fields=['ingredient', 'amount'],
+    Dish,
+    DishIngredient,
+    fields=["ingredient", "amount"],
     labels={
-        'ingredient': _('Ingredient name'),
-        'amount': _('Ingredient Amount')
+        "ingredient": _("Ingredient name"),
+        "amount": _("Ingredient Amount")
     },
     widgets={
-        'ingredient': forms.Select(attrs={'class': 'form-select'}),
-        'amount': forms.NumberInput(attrs={'class': 'form-control mb-3'}),
+        "ingredient": forms.Select(attrs={"class": "form-select"}),
+        "amount": forms.NumberInput(attrs={"class": "form-control mb-3"}),
     },
     exclude=[],
-    fk_name='dish',
+    fk_name="dish",
     extra=1,
-    can_delete=False
+    can_delete=False,
 )
 
 OrderIngredientFormset = inlineformset_factory(
-    Order, OrderIngredient,
-    fields=['ingredient', 'amount'],
+    Order,
+    OrderIngredient,
+    fields=["ingredient", "amount"],
     labels={
-        'ingredient': _('Ingredient name'),
-        'amount': _('Ingredient Amount')
+        "ingredient": _("Ingredient name"),
+        "amount": _("Ingredient Amount")
     },
     widgets={
-        'ingredient': forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
-        'amount': forms.NumberInput(attrs={'class': 'form-control mb-4'}),
+        "ingredient": forms.TextInput(
+            attrs={"class": "form-control", "readonly": "readonly"}
+        ),
+        "amount": forms.NumberInput(attrs={"class": "form-control mb-4"}),
     },
     exclude=[],
-    fk_name='order',
-    can_delete=False
+    fk_name="order",
+    can_delete=False,
 )

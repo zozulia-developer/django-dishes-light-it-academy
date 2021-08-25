@@ -5,23 +5,22 @@ from dishes.models import Dish, DishIngredient, Ingredient, Order
 
 
 class DishIngredientSerializer(serializers.ModelSerializer):
-    ingredient_name = serializers.ReadOnlyField(source='ingredient.name')
+    ingredient_name = serializers.ReadOnlyField(source="ingredient.name")
 
     class Meta:
         model = DishIngredient
-        fields = ['ingredient_name', 'amount']
+        fields = ["ingredient_name", "amount"]
 
 
-class DishSerializer(serializers.ModelSerializer):
-    name = serializers.CharField(max_length=100,
-                                 validators=[contain_numbers])
-    ingredients = DishIngredientSerializer(source='dish_ingredient',
-                                           many=True,
-                                           read_only=True)
+class DishListSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(max_length=100, validators=[contain_numbers])
+    ingredients = DishIngredientSerializer(
+        source="dish_ingredient", many=True, read_only=True
+    )
 
     class Meta:
         model = Dish
-        fields = ['name', 'ingredients', 'created_at', 'updated_at']
+        fields = ["name", "ingredients", "created_at", "updated_at"]
 
 
 class IngredientSerializer(serializers.ModelSerializer):
@@ -30,7 +29,7 @@ class IngredientSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Ingredient
-        fields = ['name']
+        fields = ["name"]
 
 
 class TopDishesSerializer(serializers.ModelSerializer):
@@ -41,4 +40,4 @@ class TopDishesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['dish', 'ingredients', 'user', 'num_order']
+        fields = ["dish", "ingredients", "user", "num_order"]

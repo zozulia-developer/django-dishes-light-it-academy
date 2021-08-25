@@ -6,18 +6,20 @@ from rest_framework.generics import GenericAPIView
 
 from api.filters import DishDateTimeFilter
 from api.permissions import IsActiveUser
-from api.serializers import DishSerializer, TopDishesSerializer
+from api.serializers import DishListSerializer, TopDishesSerializer
 from dishes.models import Dish, Order
 
 
-class DishListView(mixins.ListModelMixin,
-                   mixins.CreateModelMixin,
-                   GenericAPIView):
+class DishListView(
+    mixins.ListModelMixin,
+    mixins.CreateModelMixin,
+    GenericAPIView
+):
     queryset = Dish.objects.all()
-    serializer_class = DishSerializer
+    serializer_class = DishListSerializer
     permission_classes = [IsActiveUser]
     filter_backends = [DjangoFilterBackend, OrderingFilter]
-    ordering_fields = ['created_at', 'name']
+    ordering_fields = ["created_at", "name"]
     filterset_class = DishDateTimeFilter
 
     def get(self, request, *args, **kwargs):
@@ -27,12 +29,14 @@ class DishListView(mixins.ListModelMixin,
         return self.create(request, *args, **kwargs)
 
 
-class DishDetailView(mixins.RetrieveModelMixin,
-                     mixins.UpdateModelMixin,
-                     mixins.DestroyModelMixin,
-                     GenericAPIView):
+class DishDetailView(
+    mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin,
+    GenericAPIView,
+):
     queryset = Dish.objects.all()
-    serializer_class = DishSerializer
+    serializer_class = DishListSerializer
     permission_classes = [IsActiveUser]
 
     def get(self, request, *args, **kwargs):
@@ -46,10 +50,11 @@ class DishDetailView(mixins.RetrieveModelMixin,
 
 
 class TopDishesListView(mixins.ListModelMixin, GenericAPIView):
-    queryset = Order.objects\
-                   .values('dish', 'user')\
-                   .annotate(num_order=Count('dish'))\
-                   .order_by('-num_order')[:3]
+    queryset = (
+        Order.objects.values("dish", "user")
+        .annotate(num_order=Count("dish"))
+        .order_by("-num_order")[:3]
+    )
     serializer_class = TopDishesSerializer
 
     def get(self, request, *args, **kwargs):
