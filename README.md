@@ -1,5 +1,5 @@
 # Django Dishes
-## Инструкция по запуску
+## Инструкция по запуску без Docker
 1. Установить виртуальное окружение.
 ```commandline
 pip install virtualenv
@@ -23,15 +23,19 @@ python manage.py createcachetable
 python manage.py runserver
 ```
 ---
-## Запуск с Docker
+## Запуск с Docker-compose
 ```commandline
-docker build -f Dockerfile --tag light-it-docker:latest .
+docker-compose build
 ```
 ```commandline
-docker run -d -p 8082:8000 light-it-docker
+docker-compose up -d
 ```
----
-- Создать супер пользователя, container_id - id текущего контейнера
 ```commandline
-docker exec -it container_id python manage.py createsuperuser
+docker exec dish_order python manage.py migrate
+```
+```commandline
+docker exec dish_order python manage.py createcachetable
+```
+```commandline
+docker exec -it dish_order python manage.py createsuperuser
 ```

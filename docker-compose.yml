@@ -1,0 +1,43 @@
+version: '3.8'
+services:
+  redis:
+    image: "redis:alpine"
+  web:
+    build: .
+    container_name: "dish_order"
+    command: "python manage.py runserver 0.0.0.0:8000"
+    restart: always
+    volumes:
+      - ".:/app"
+    ports:
+      - "8000:8000"
+    environment:
+      - SECRET_KEY=django-insecure-+w$vbzn7m)t&_r5=90^-)51e#)o17lj5bmh@!sbo4o*u12d2r^
+      - DEBUG=1
+    depends_on:
+      - redis
+  celery:
+    build: .
+    command: "celery -A dish_order worker -l INFO"
+    restart: always
+    volumes:
+      - ".:/app"
+    environment:
+      - SECRET_KEY=django-insecure-+w$vbzn7m)t&_r5=90^-)51e#)o17lj5bmh@!sbo4o*u12d2r^
+      - DEBUG=1
+    depends_on:
+      - redis
+      - web
+  celery-beat:
+    build: .
+    command: "celery -A dish_order beat -l INFO"
+    restart: always
+    volumes:
+      - ".:/app"
+    environment:
+      - SECRET_KEY=django-insecure-+w$vbzn7m)t&_r5=90^-)51e#)o17lj5bmh@!sbo4o*u12d2r^
+      - DEBUG=1
+    depends_on:
+      - redis
+      - web
+      - celery
